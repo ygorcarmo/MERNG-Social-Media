@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "nonstop": "nodemon server.js",
     "seed": "node seeds/seed.js",
     "watch": "nodemon server.js"
   },
@@ -13,10 +14,10 @@
   "dependencies": {
     "apollo-server-express": "^2.19.0",
     "express": "^4.17.1",
-    "mongoose": "^5.11.6",
-    "graphql": "^15.5.1"
+    "graphql": "^15.5.1",
+    "mongoose": "^5.11.6"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.15"
   }
 }

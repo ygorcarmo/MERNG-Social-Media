@@ -1,23 +1,9 @@
-const { User, Post } = require('../models');
+const postResolver = require('./individualResolvers/post');
+// const userResolver = require('./individualResolvers/user');
 
 const resolvers = {
   Query: {
-    // user: async () => {
-    //   return User.find({});
-    // },
-    // posts: async (parent, { _id }) => {
-    //   const params = _id ? { _id } : {};
-    //   return Post.find(params);
-    // },
-    async getPosts(){
-      try{
-        const posts = await Post.find();
-        return posts;
-      }
-      catch(err){
-        throw new Error(err);
-      }
-    }
+    ...postResolver.Query
   },
   // Mutation: {
   //   createUser: async (parent, args) => {
