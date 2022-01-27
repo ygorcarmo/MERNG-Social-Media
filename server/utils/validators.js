@@ -10,7 +10,7 @@ module.exports.validateRegisterInput = (
         errors.username = 'Invalid username';
     
     if(email.trim() === '' || username === null)
-        errors.username = 'Invalid email address';
+        errors.email = 'Invalid email address';
     else{
         const regEx = /^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/;
         if(!email.match(regEx))
@@ -26,5 +26,20 @@ module.exports.validateRegisterInput = (
     return {
         errors,
         valid: Object.keys(errors).length < 1
-    }
+    };
+};
+
+module.exports.validateLoginInput = (username, password) => {
+    const errors = {};
+
+    if(username.trim() === '' || username === null)
+        errors.username = 'Invalid username';
+
+    if(password.trim() === '' || username === null)
+        errors.password = 'Invalid password';
+
+    return {
+        errors,
+        valid: Object.keys(errors).length < 1
+    };
 }
