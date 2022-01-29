@@ -1,13 +1,14 @@
-const postResolver = require('./individualResolvers/post');
-const userResolver = require('./individualResolvers/user');
+const postResolver = require("./individualResolvers/post");
+const userResolver = require("./individualResolvers/user");
 
 const resolvers = {
   Query: {
-    ...postResolver.Query
+    ...postResolver.Query,
   },
   Mutation: {
-    ...userResolver.Mutation
-  }
+    ...userResolver.Mutation,
+    ...postResolver.Mutation,
+  },
 };
 
 module.exports = resolvers;
