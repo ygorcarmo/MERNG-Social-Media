@@ -1,5 +1,6 @@
-const postResolver = require("./individualResolvers/post");
 const userResolver = require("./individualResolvers/user");
+const postResolver = require("./individualResolvers/post");
+const commentResolver = require("./individualResolvers/comment");
 
 const resolvers = {
   Query: {
@@ -8,6 +9,7 @@ const resolvers = {
   Mutation: {
     ...userResolver.Mutation,
     ...postResolver.Mutation,
+    ...commentResolver.Mutation 
   },
 };
 

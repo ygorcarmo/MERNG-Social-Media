@@ -66,10 +66,10 @@ const typeDefs = gql`
     deletePost(postId: ID!): String
     updatePost(id: ID, body: String!, title: String): Post
     savedPost(input: savedPost): User
+    likePost(postId: ID): Post
 
     createComment(postId: String, body: String): Post
     deleteComment(postId: ID, comment: ID): Post
-    likePost(postId: ID): Post
   }
 `;
 
