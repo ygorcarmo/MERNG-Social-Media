@@ -51,7 +51,7 @@ const typeDefs = gql`
 
   type Auth {
     token: ID!
-    user: USer
+    user: User
   }
   
  type Query {
@@ -70,8 +70,8 @@ const typeDefs = gql`
     savedPost(input: savedPost): User
 
     createComment(postId: String, body: String): Post
-    deleteComment(postId: ID, comment: ID): Article
-    likePost(articleId: ID): Post
+    deleteComment(postId: ID, comment: ID): Post
+    likePost(postId: ID): Post
   }
 `;
 
