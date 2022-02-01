@@ -2,18 +2,31 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type Post{
-    id: ID!
-    body: String!
-    createdAt: String!
-    username: String!
+    id: ID
+    title: String
+    body: String
+    comments: [Comment]
+    likes:[Like]
+    commentCount: Int
+    likeCount:Int
+    createdAt: String
+    username: String    
   }
   type User{
-    id: ID!
-    email: String!
+    id: ID
+    email: String
     password: String!
     token: String!
     username: String!
+    postCount: Int
     createdAt: String!
+  }
+
+  type Comment {
+    id: ID
+    createdAt: String
+    username: String
+    body: String
   }
 
   input RegisterInput{
