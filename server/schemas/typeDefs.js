@@ -11,15 +11,14 @@ const typeDefs = gql`
     likeCount:Int
     createdAt: String
     username: String    
+    user: User
   }
   type User{
     id: ID
     email: String
-    password: String!
-    token: String!
-    username: String!
+    username: String
     postCount: Int
-    createdAt: String!
+    createdAt: String
   }
 
   type Comment {
@@ -64,7 +63,7 @@ const typeDefs = gql`
     register(registerInput: RegisterInput): Auth
     login(username: String!, password: String!): Auth
 
-    createPost(body:String, title: String): Post
+    createPost(body: String, title: String): Post
     deletePost(postId: ID!): User
     updatePost(id: ID, body: String!, title: String): Post
     savedPost(input: savedPost): User

@@ -26,7 +26,8 @@ module.exports = {
       const { errors, valid } = validateLoginInput(username, password);
       const user = await User.findOne({ username });
 
-      if (!valid) throw new UserInputError("Error ", { errors });
+      if (!valid) 
+        throw new UserInputError("Error ", { errors });
 
       if (!user) {
         errors.general = "Invalid User and/or Password";
@@ -43,9 +44,8 @@ module.exports = {
       const token = generateToken(user);
 
       return {
-        ...user._doc,
-        id: user._id,
         token,
+        user
       };
     },
 
@@ -87,9 +87,8 @@ module.exports = {
       const token = generateToken(res);
 
       return {
-        ...res._doc,
-        id: res._id,
         token,
+        user
       };
     },
   },

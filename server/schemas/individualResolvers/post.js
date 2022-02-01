@@ -27,20 +27,21 @@ module.exports = {
     },
   },
   Mutation: {
-    async createPost(_, { body }, context) {
+    async createPost(parent, { body, title }, context) {
       const user = checkAuth(context);
-      console.log(user);
-
-      const newPost = new Post({
+      
+      console.log(title);
+      const newPost = await Post.create({
         body,
+        title,
         user: user.indexOf,
         username: user.username,
         createdAt: new Date().toISOString(),
       });
 
-      const post = await newPost.save();
+      // const post = await newPost.save();
 
-      return post;
+      return newPost;
     },
     async deletePost(_, { postId }, context) {
       const user = checkAuth(context);
