@@ -10,9 +10,9 @@ const typeDefs = gql`
     commentCount: Int
     likeCount:Int
     createdAt: String
-    username: String    
-    user: User
+    username: String
   }
+
   type User{
     id: ID
     email: String
@@ -54,7 +54,6 @@ const typeDefs = gql`
   }
   
  type Query {
-    me: User
     getPosts: [Post]
     getPost(postId: ID!): Post
   }
@@ -64,7 +63,7 @@ const typeDefs = gql`
     login(username: String!, password: String!): Auth
 
     createPost(body: String, title: String): Post
-    deletePost(postId: ID!): User
+    deletePost(postId: ID!): String
     updatePost(id: ID, body: String!, title: String): Post
     savedPost(input: savedPost): User
 
@@ -73,29 +72,5 @@ const typeDefs = gql`
     likePost(postId: ID): Post
   }
 `;
-
-// stuff that I will need later
-// type Tech {
-//   _id: ID!
-//   name: String!
-// }
-
-// type Matchup {
-//   _id: ID!
-//   tech1: String!
-//   tech2: String!
-//   tech1_votes: Int
-//   tech2_votes: Int
-// }
-
-// type Query {
-//   tech: [Tech]
-//   matchups(_id: String): [Matchup]
-// }
-
-// type Mutation {
-//   createMatchup(tech1: String!, tech2: String!): Matchup
-//   createVote(_id: String!, techNum: Int!): Matchup
-// }
 
 module.exports = typeDefs;
