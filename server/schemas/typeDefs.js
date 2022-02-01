@@ -29,23 +29,49 @@ const typeDefs = gql`
     body: String
   }
 
+  type Like{
+    id: ID
+    createdAt: String
+    username: String
+  }
+  
   input RegisterInput{
-    username: String!
-    password: String!
-    confirmPassword: String!
-    email: String!
+    username: String
+    password: String
+    confirmPassword: String
+    email: String
+  }
+
+  input savedPost{
+    postId: String
+    title: String
+    username: String
+    body: String
+  }
+
+  type Auth {
+    token: ID!
+    user: USer
   }
   
  type Query {
+    me: User
     getPosts: [Post]
     getPost(postId: ID!): Post
   }
 
   type Mutation{
-    register(registerInput: RegisterInput): User!
-    login(username: String!, password: String!): User!
-    createPost(body:String!): Post!
-    deletePost(postId: ID!): String!
+    register(registerInput: RegisterInput): Auth
+    login(username: String!, password: String!): Auth
+
+    createPost(body:String, title: String): Post
+    deletePost(postId: ID!): User
+    updatePost(id: ID, body: String!, title: String): Post
+    savedPost(input: savedPost): User
+
+    createComment(postId: String, body: String): Post
+    deleteComment(postId: ID, comment: ID): Article
+    likePost(articleId: ID): Post
   }
 `;
 
