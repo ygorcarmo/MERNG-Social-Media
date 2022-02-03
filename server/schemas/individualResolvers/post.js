@@ -31,7 +31,7 @@ module.exports = {
       const user = checkAuth(context);
       
       console.log(title);
-      const newPost = await Post.create({
+      const newPost = new Post({
         body,
         title,
         user: user.indexOf,
@@ -39,9 +39,13 @@ module.exports = {
         createdAt: new Date().toISOString(),
       });
 
-      // const post = await newPost.save();
+      const post = await newPost.save();
 
-      return newPost;
+      context.pubsub.publish('NEW_POST',{
+        newPost
+      });
+
+      return post;
     },
     async deletePost(_, { postId }, context) {
       const user = checkAuth(context);
@@ -81,4 +85,9 @@ module.exports = {
         throw new UserInputError('Post not found');
     }
   },
+  Subscription: {
+    newPost: {      
+      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('NEW_POST')
+    }
+  }
 };

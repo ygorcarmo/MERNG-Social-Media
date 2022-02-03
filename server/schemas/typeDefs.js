@@ -71,6 +71,10 @@ const typeDefs = gql`
     createComment(postId: String, body: String): Post
     deleteComment(postId: ID, commentId: ID): Post
   }
+
+  type Subscription{
+    newPost: Post!
+  }
 `;
 
 module.exports = typeDefs;

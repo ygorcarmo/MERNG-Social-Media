@@ -11,6 +11,9 @@ const resolvers = {
     ...postResolver.Mutation,
     ...commentResolver.Mutation 
   },
+  Subscription: {
+    ...postResolver.Subscription
+  }
 };
 
 module.exports = resolvers;
