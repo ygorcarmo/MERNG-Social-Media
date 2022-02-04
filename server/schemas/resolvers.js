@@ -3,6 +3,10 @@ const postResolver = require("./individualResolvers/post");
 const commentResolver = require("./individualResolvers/comment");
 
 const resolvers = {
+  Post:{
+    likeCount: (parent) => parent.likes.length,
+    commentCount: (parent) => parent.comments.length   
+  },
   Query: {
     ...postResolver.Query,
   },
