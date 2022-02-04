@@ -1,11 +1,14 @@
 const express = require("express");
 const path = require("path");
+// Pubsub on this line
 const { ApolloServer, PubSub } = require("apollo-server-express");
+// this line
 const { createServer } = require('http');
 const db = require("./config/connection");
 const { typeDefs, resolvers } = require("./schemas");
 require("dotenv").config();
 
+// this line
 const pubsub = new PubSub();
 
 const app = express();
@@ -30,6 +33,8 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
+
+// this line(38, 39)
 const httpServer = createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
