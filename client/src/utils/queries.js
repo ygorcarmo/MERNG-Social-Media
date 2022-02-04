@@ -5,7 +5,6 @@ export const GET_POSTS = gql`
     getPosts {
       id
       username
-      title
       body
       createdAt
       user {
@@ -22,6 +21,7 @@ export const GET_POSTS = gql`
       }
       likeCount
       likes {
+        createdAt
         username
       }
     }
@@ -33,7 +33,6 @@ export const GET_POST = gql`
     getPost (postId: $postId) {
       id
       username
-      title
       body
       createdAt
       user {

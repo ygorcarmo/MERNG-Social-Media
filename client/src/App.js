@@ -3,6 +3,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 
+import Home from './pages/Home';
+import Navbar from './components/Navbar';
+import SinglePost from './pages/SinglePost';
+import Login from './pages/Login';
+import Register from './pages/Register'; 
+import Profile from './pages/Profile';
+
 const httpLink = createHttpLink({
   uri: '/graphql'
 });
@@ -29,11 +36,27 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="flex-column justify-center align-center min-100-vh bg-primary">
-          <Switch>
-            
-          </Switch>
-        </div>
+      <Navbar className="ui stackable menu" />
+      <div className='ui container'>
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route exact path='/profile'>
+            <Profile />
+          </Route>
+          <Route exact path='/login'>
+            <Login />
+          </Route>
+          <Route exact path='/register'>
+            <Register />
+          </Route>
+           <Route exact path='/posts/:postId'>
+            <SinglePost />
+          </Route> 
+          <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
+        </Switch>
+      </div>
       </Router>
     </ApolloProvider>
   );
