@@ -39,6 +39,7 @@ const httpServer = createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
 db.once("open", () => {
+  // change app to httpServer
   httpServer.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     // log where we can go to test our GQL API
