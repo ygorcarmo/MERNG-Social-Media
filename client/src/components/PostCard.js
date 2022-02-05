@@ -23,7 +23,7 @@ function PostCard({  post: { body, createdAt, postImage, id, username, likeCount
                 </Button> */}
             </Card.Content>
             <Card.Content extra>
-                    <Button color='red' content='Like' icon='heart'  label={{ basic: true, color: 'red', pointing: 'left', content:`${likeCount}` }}   />
+                <LikeButton post={{ id, likes, likeCount}} />
                     <Button labelPosition='right' as={Link} to={`/post/${id}`}>
                         <Button color='blue' basic>
                             <Icon name='comments' />
@@ -39,3 +39,7 @@ function PostCard({  post: { body, createdAt, postImage, id, username, likeCount
 }
 
 export default PostCard;
+
+
+// like button
+{/* <Button basic color='red' content='Like' icon='heart'  label={{ basic: true, color: 'red', pointing: 'left', content:`${likeCount}` }}   /> */}

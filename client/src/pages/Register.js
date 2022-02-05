@@ -3,22 +3,18 @@ import { BrowserRouter as Router, useHistory } from "react-router-dom";
 import { Form, Button } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client';
 import '../styles/styles.css'
-
 import { REGISTER_USER } from '../utils/mutations';
-
 import Auth from '../utils/auth';
 
 function Register(props) {
   const [errors, setErrors] = useState({});
 
-  const [ userFormData, setUserFormData ] = useState({
+  const [ values, setValues ] = useState({
     username: '',
     email: '',
     password: '',
     confirmPassword: ''
-  })
-
-  const history = useHistory
+  });
 
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, result) {
@@ -30,79 +26,71 @@ function Register(props) {
     },
   })
 
-   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+   const onChange = (event) => {
+    setValues({ ...values, [ event.target.name]: event.target.value });
   };
 
-
-  const handleFormSubmit = async (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(userFormData)
+    console.log(values)
 
     try {
       const { data } = await registerUser({
-        variables: {registerInput: { ...userFormData }},
+        variables: {registerInput: { ...values }},
       });
-      console.log('checking if register is fetching data')
-      Auth.login(data.registerUser.token);
+      Auth.login(data.register.token);
     } catch (e) {
       console.error(e);
       console.log(e)
     }
-
-    setUserFormData({
-      username: '',
-      password: '',
-    });
+    values({username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''});
   };
-
-  function handleClick() {
-    history.push('/Feed');
-  }
 
   return (
     <div className="form-container">
-      <Form onSubmit={handleFormSubmit} noValidate className={loading ? 'loading' : ''}>
+      <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
         <h1>Register</h1>
         <Form.Input
           label='Username'
           placeholder='Username'
           name='username'
           type='text'
-          value={userFormData.username}
+          value={setValues.username}
           error={errors.username ? true : false}
-          onChange={handleInputChange}
+          onChange={onChange}
         />
         <Form.Input
           label='Email'
           placeholder='Email'
           name='email'
           type='email'
-          value={userFormData.email}
+          value={setValues.email}
           error={errors.email ? true : false}
-          onChange={handleInputChange}
+          onChange={onChange}
         />
         <Form.Input
           label='Password'
           placeholder='Password'
           name='password'
           type='password'
-          value={userFormData.password}
+          value={setValues.password}
           error={errors.password ? true : false}
-          onChange={handleInputChange}
+          onChange={onChange}
         />
         <Form.Input
           label='Confirm Password'
           placeholder='Confirm Password'
           name='confirmPassword'
           type='password'
-          value={userFormData.confirmPassword}
+          value={setValues.confirmPassword}
           error={errors.confirmPassword ? true : false}
-          onChange={handleInputChange}
+          onChange={onChange}
         />
         <Router>
-          <Button type='submit' primary onClick={handleClick}>
+          <Button type='submit' primary>
             Register
           </Button>
         </Router>

@@ -15,7 +15,7 @@ function generateToken(user) {
       username: user.username,
     },
     process.env.SECRET_KEY,
-    { expiresIn: "1h" }
+    { expiresIn: "10h" }
   );
 }
 
@@ -62,10 +62,11 @@ module.exports = {
         confirmPassword
       );
 
-      if (!valid) throw new UserInputError("Errors", { errors });
+      if (!valid) 
+        throw new UserInputError("Errors", { errors });
 
       // Make sure user does not already exist
-      const user = await User.findOne({ username });
+      let user = await User.findOne({ username });
       if (user)
         throw new UserInputError("Username already exists.", {
           errors: {
@@ -82,9 +83,9 @@ module.exports = {
         createdAt: new Date().toISOString(),
       });
 
-      const res = await newUser.save();
+      user = await newUser.save();
 
-      const token = generateToken(res);
+      const token = generateToken(user);
 
       return {
         token,

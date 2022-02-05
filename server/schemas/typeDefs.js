@@ -11,7 +11,6 @@ const typeDefs = gql`
     likeCount:Int
     createdAt: String
     username: String
-
     user: User
   }
 
@@ -38,9 +37,9 @@ const typeDefs = gql`
   
   input RegisterInput{
     username: String
+    email: String
     password: String
     confirmPassword: String
-    email: String
   }
 
   input savedPost{

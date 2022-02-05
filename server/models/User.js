@@ -5,6 +5,12 @@ const userSchema = new Schema({
     password: String,
     email: String,
     createdAt: String
-});
+    },
+    {
+        toJSON: {
+          virtuals: true,
+        },
+    }
+);
 
 module.exports = model('User', userSchema);
