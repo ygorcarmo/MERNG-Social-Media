@@ -9,6 +9,7 @@ const resolvers = {
   },
   Query: {
     ...postResolver.Query,
+    ...userResolver.Query
   },
   Mutation: {
     ...userResolver.Mutation,

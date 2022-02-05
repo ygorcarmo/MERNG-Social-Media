@@ -1,8 +1,19 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+  type User{
+    id: ID
+    _id: ID
+    email: String
+    username: String
+    postCount: Int
+    posts: [Post]!
+    createdAt: String
+  }
+
   type Post{
     id: ID
+    _id: ID
     body: String
     postImage: String
     comments: [Comment]
@@ -12,14 +23,6 @@ const typeDefs = gql`
     createdAt: String
     username: String
     user: User
-  }
-
-  type User{
-    id: ID
-    email: String
-    username: String
-    postCount: Int
-    createdAt: String
   }
 
   type Comment {
@@ -55,7 +58,8 @@ const typeDefs = gql`
   }
   
  type Query {
-    me: User
+    user(username: String!): User
+    posts(username: String!): [Post]
     getPosts: [Post]
     getPost(postId: ID!): Post
   }

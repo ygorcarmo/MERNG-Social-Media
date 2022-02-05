@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { User } = require("../../models");
+const { User, Post } = require("../../models");
 const { UserInputError } = require("apollo-server-express");
 const {
   validateRegisterInput,
@@ -20,6 +20,17 @@ function generateToken(user) {
 }
 
 module.exports = {
+  Query: {    
+    user: async (parent, { username }) => {
+      console.log(username)
+      return User.findOne({ username }).populate('posts');
+    },
+    posts: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      console.log(params)
+      return Post.find(params).sort({ createdAt: -1 });
+    },
+  },
   Mutation: {
     // user login function
     async login(_, { username, password }) {

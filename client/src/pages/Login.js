@@ -15,12 +15,14 @@ function Login(props) {
   });
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-    update(proxy, result) {
-      console.log(result)
+    update(proxy, { data: {login: userData }}) {
+      context.login(userData);
+      // props.history.push('/');
     },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
+    variables: values 
   });
 
   const onChange = (event) => {

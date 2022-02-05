@@ -54,3 +54,13 @@ export const GET_POST = gql`
     }
   }
 `;
+
+export const QUERY_USER = gql`
+  query user($username: String!) {
+    user(username: $username) {
+      id
+      username
+      email
+    }
+  }
+`;
