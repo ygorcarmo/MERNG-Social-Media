@@ -9,8 +9,7 @@ import { GET_POSTS } from "../utils/queries";
 
 const Home = () => {
   const { loading, data } = useQuery(GET_POSTS);
-  //   const isLoggedIn = Auth.loggedIn();
-  //   console.log(isLoggedIn);
+  const isLoggedIn = Auth.loggedIn();
   const [visible, setVisble] = useState(false);
   const postData = data?.getPosts || [];
 
@@ -22,6 +21,11 @@ const Home = () => {
     <>
       <Grid columns={3}>
         <Grid.Row>
+          {/* {isLoggedIn && (
+            <Grid.Column>
+              <PostForm/>
+            </Grid.Column>
+          )} */}
           {loading ? (
             <h1> Loading Posts...</h1>
           ) : (

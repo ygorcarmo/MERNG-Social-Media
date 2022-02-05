@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "semantic-ui-react";
-import { Navbar, Container, Nav } from "react-bootstrap";
 import "../styles/styles.css";
 import "../App.css";
 import Auth from "../utils/auth";
@@ -36,7 +35,24 @@ function Navbars() {
             to="/Profile"
           />
         ) : (
-          <Menu.Item className="disabled item" name="profile" disabled />
+          <Menu.Item
+            className="disabled item invisible"
+            name="profile"
+            disabled
+          />
+        )}
+      </div>
+      <div>
+        {Auth.loggedIn() ? (
+          <Menu.Item
+            name="Create a Post"
+            active={activeItem === "createPost"}
+            onClick={handleItemClick}
+            as={Link}
+            to="/CreatePost"
+          />
+        ) : (
+          <Menu.Item className="disabled item invisible" disabled />
         )}
       </div>
       <Menu.Menu position="right">

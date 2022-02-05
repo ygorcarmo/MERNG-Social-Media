@@ -13,8 +13,10 @@ import Navbar from "./components/Navbar";
 import SinglePost from "./pages/SinglePost";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import CreatePost from "./pages/CreatePost";
 import Profile from "./pages/Profile";
 import AuthRoute from "./utils/AuthRoute";
+import AuthNotLoggedInRoute from "./utils/AuthNotLoggedInRoute";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -48,9 +50,12 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/profile">
-              <Profile />
-            </Route>
+            <AuthNotLoggedInRoute exact path="/profile" component={Profile} />
+            <AuthNotLoggedInRoute
+              exact
+              path="/createPost"
+              component={CreatePost}
+            />
             <AuthRoute exact path="/login" component={Login} />
             <AuthRoute exact path="/register" component={Register} />
             <Route exact path="/posts/:postId">
