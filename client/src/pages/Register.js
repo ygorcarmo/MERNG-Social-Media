@@ -36,7 +36,7 @@ function Register(props) {
       const { data } = await registerUser({
         variables: {registerInput: { ...values }},
       });
-      if(errors < 0)
+      if(data != undefined)
         Auth.login(data.register.token);
     } catch (e) {
       console.error(e);

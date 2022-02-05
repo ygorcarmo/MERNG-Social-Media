@@ -31,7 +31,7 @@ function Login(props) {
       const { data } = await loginUser({
         variables: { ...values },
       });
-      if(errors < 0)
+      if(data != undefined)
         Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
