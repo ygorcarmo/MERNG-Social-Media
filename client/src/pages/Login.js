@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { BrowserRouter as Router, useHistory } from "react-router-dom";
 import { Form, Button } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import { AuthContext } from '../context/authenticatior';
 
-function Login(props) {  
+function Login(props) { 
+  const context = useContext(AuthContext); 
   const [errors, setErrors] = useState({})
   const [ values, setValues ] = useState({
     username: '',
