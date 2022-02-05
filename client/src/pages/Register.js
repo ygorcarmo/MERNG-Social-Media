@@ -21,8 +21,8 @@ function Register(props) {
       console.log(result)
     },
     onError(err) {
-      console.log(err)
-      setErrors(err)
+      console.log(err.graphQLErrors[0].extensions.exception.errors)
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
   })
 
@@ -43,7 +43,7 @@ function Register(props) {
       console.error(e);
       console.log(e)
     }
-    values({username: '',
+    setValues({username: '',
     email: '',
     password: '',
     confirmPassword: ''});
