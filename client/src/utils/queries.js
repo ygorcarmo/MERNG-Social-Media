@@ -6,6 +6,7 @@ export const GET_POSTS = gql`
       id
       username
       body
+      postImage
       createdAt
       user {
         id

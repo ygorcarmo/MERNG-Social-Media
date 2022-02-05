@@ -5,6 +5,10 @@ const postSchema = new Schema({
         type: String,
         required: true,
     },
+    postImage: {
+        type: String,
+        required: true
+    },
     username: String,
     createdAt: String,
     comments: [{

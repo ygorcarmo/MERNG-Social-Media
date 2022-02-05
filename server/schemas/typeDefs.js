@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Post{
     id: ID
     body: String
+    postImage: String
     comments: [Comment]
     likes:[Like]
     commentCount: Int
@@ -64,7 +65,7 @@ const typeDefs = gql`
     register(registerInput: RegisterInput): Auth
     login(username: String!, password: String!): Auth
 
-    createPost(body: String): Post
+    createPost(body: String, postImage: String): Post
     deletePost(postId: ID!): String
     updatePost(id: ID, body: String!): Post
     savedPost(input: savedPost): User
