@@ -26,10 +26,10 @@ function SinglePost(props) {
   const [errors, setErrors] = useState({});
 
   const pathname = window.location.pathname;
-  console.log(pathname);
 
   const { postId } = useParams();
   const user = Auth.getProfile();
+  console.log(user);
   const loggedIn = Auth.loggedIn();
 
   const commentInputRef = useRef(null);
@@ -45,10 +45,9 @@ function SinglePost(props) {
 
   const [createComment, { error }] = useMutation(CREATE_COMMENT, {
     update(proxy, result) {
-      const commentData = proxy.readQuery({ query: CREATE_COMMENT });
-      proxy.writeQuery({ query: CREATE_COMMENT, commentData });
+      // const commentData = proxy.readQuery({ query: CREATE_COMMENT });
+      // proxy.writeQuery({ query: CREATE_COMMENT, commentData });
       setComment("");
-      // blurs form placeholder once comment has been submitted
       commentInputRef.current.blur();
     },
     variables: {
@@ -123,7 +122,9 @@ function SinglePost(props) {
                   </Label>
                 </Button>
                 {loggedIn && user.username == username && (
-                  <DeleteButton postId={id} callback={deletePostCallback} />
+                  <div>
+                    <DeleteButton postId={id} callback={deletePostCallback} />
+                  </div>
                 )}
               </Card.Content>
             </Card>
@@ -155,17 +156,16 @@ function SinglePost(props) {
                 </Card.Content>
               </Card>
             )}
-            {/* MAP COMMENTS ================================================================================= */}
             {comments.map((comment) => (
-              <Card fluid key={comment.length}>
+              <Card fluid key={comment.id}>
                 <Card.Content>
-                  {/* IF USER LOGGED IN MATCHES USERNAME OF COMMENT DELETE BUTTON WILL DISPLAY */}
                   {loggedIn && user.username === comment.username && (
-                    <DeleteButton postId={id} commentId={id} />
+                    <DeleteButton postId={id} commentId={comment.id} />
                   )}
-                  <Card.Header>{comment.username}</Card.Header>
-                  {/* <Card.Meta>{moment(createdAt).fromNow(true)} </Card.Meta> */}
-                  <Card.Description>{comment.body}</Card.Description>
+                  <Card.Header>{comment.body}</Card.Header>
+                  <Card.Description>
+                    {comment.username} {moment(comment.createdAt).fromNow()}
+                  </Card.Description>
                 </Card.Content>
               </Card>
             ))}

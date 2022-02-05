@@ -74,7 +74,7 @@ export const LIKE_POST = gql`
 
 export const CREATE_COMMENT = gql`
   mutation createComment($postId: String!, $body: String!) {
-    deleteComment(postId: $postId, body: $body) {
+    createComment(postId: $postId, body: $body) {
       id
       body
       comments {
@@ -98,7 +98,6 @@ export const DELETE_COMMENT = gql`
         createdAt
         body
       }
-      commentCount
     }
   }
 `;

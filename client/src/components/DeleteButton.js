@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { Button, Confirm, Label, Icon } from "semantic-ui-react";
-import "../styles/styles.css";
+import MyPopup from "../utils/MyPopup";
 
 import { DELETE_POST, DELETE_COMMENT } from "../utils/mutations";
-import { GET_POSTS } from "../utils/queries";
 
 function DeleteButton({ postId, commentId, callback }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const mutation = commentId ? DELETE_COMMENT : DELETE_POST;
+  // console.log(commentId);
 
   const [deletePostOrMutation] = useMutation(mutation, {
     update(proxy, result) {
@@ -21,6 +20,7 @@ function DeleteButton({ postId, commentId, callback }) {
       //   data.getPosts = data.getPosts.filter((posts) => posts.id !== postId);
       //   proxy.writeQuery({ query: GET_POSTS, data });
       // }
+      window.location.reload();
       if (callback) callback();
     },
     variables: {
@@ -31,15 +31,19 @@ function DeleteButton({ postId, commentId, callback }) {
 
   return (
     <>
-      <Button
-        as="div"
-        color="red"
-        floated="right"
-        onClick={() => setConfirmOpen(true)}
-      >
-        <Icon name="trash" style={{ margin: 0 }}></Icon>
-      </Button>
+      <MyPopup content={commentId ? "Delete comment" : "Delete post"}>
+        <Button
+          as="div"
+          color="red"
+          floated="right"
+          onClick={() => setConfirmOpen(true)}
+        >
+          <Icon name="trash" style={{ margin: 0 }} />
+        </Button>
+      </MyPopup>
       <Confirm
+        centered
+        size="mini"
         open={confirmOpen}
         onCancel={() => setConfirmOpen(false)}
         onConfirm={deletePostOrMutation}

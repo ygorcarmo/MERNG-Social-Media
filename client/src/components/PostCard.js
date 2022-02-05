@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, Icon, Label, Button, Image } from "semantic-ui-react";
+import { Card, Icon, Label, Button, Image, Popup } from "semantic-ui-react";
 import LikeButton from "./LikeButton";
 import DeleteButton from "./DeleteButton";
 import "../styles/styles.css";
@@ -40,15 +40,21 @@ function PostCard({
       </Card.Content>
       <Card.Content extra>
         <LikeButton post={{ id, likes, likeCount }} />
-        <Button labelPosition="right" as={Link} to={`/posts/${id}`}>
-          <Button color="blue" basic>
-            <Icon name="comments" />
-            Comment
-          </Button>
-          <Label basic color="blue" pointing="left">
-            {commentCount}
-          </Label>
-        </Button>
+        <Popup
+          content="Comment on post"
+          inverted
+          trigger={
+            <Button labelPosition="right" as={Link} to={`/posts/${id}`}>
+              <Button color="blue" basic>
+                <Icon name="comments" />
+                Comment
+              </Button>
+              <Label basic color="blue" pointing="left">
+                {commentCount}
+              </Label>
+            </Button>
+          }
+        />
         {isLoggedIn && user.username === username && (
           <DeleteButton postId={id} />
         )}
