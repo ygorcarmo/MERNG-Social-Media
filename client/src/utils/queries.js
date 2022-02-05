@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_POSTS = gql`
   {
@@ -13,8 +13,8 @@ export const GET_POSTS = gql`
         username
         email
       }
-      commentCount  
-      comments{
+      commentCount
+      comments {
         id
         username
         body
@@ -30,18 +30,14 @@ export const GET_POSTS = gql`
 
 export const GET_POST = gql`
   query getPost($postId: ID!) {
-    getPost (postId: $postId) {
+    getPost(postId: $postId) {
       id
       username
+      postImage
       body
       createdAt
-      user {
-        id
-        username
-        email
-      }
-      commentCount  
-      comments{
+      commentCount
+      comments {
         id
         username
         body

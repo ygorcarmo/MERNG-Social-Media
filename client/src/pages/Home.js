@@ -21,11 +21,6 @@ const Home = () => {
     <>
       <Grid columns={3}>
         <Grid.Row>
-          {/* {isLoggedIn && (
-            <Grid.Column>
-              <PostForm/>
-            </Grid.Column>
-          )} */}
           {loading ? (
             <h1> Loading Posts...</h1>
           ) : (

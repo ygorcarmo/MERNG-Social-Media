@@ -7,14 +7,9 @@ import Auth from "../utils/auth";
 
 import { LIKE_POST } from "../utils/mutations";
 
-function LikeButton({ user, post: { id, likeCount, likes } }) {
+function LikeButton({ post: { id, likeCount, likes } }) {
   const [liked, setLiked] = useState("");
   const isLoggedIn = Auth.loggedIn();
-
-  const pathname = window.location.pathname;
-  const path = pathname === "/" ? "home" : pathname.substring(1);
-  const [activeItem, setActiveItem] = useState(path);
-  const handleItemClick = (e, { name }) => setActiveItem(name);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -22,7 +17,7 @@ function LikeButton({ user, post: { id, likeCount, likes } }) {
         setLiked(true);
       else setLiked(false);
     }
-  }, [user, likes]);
+  }, [likes]);
 
   const [likePost] = useMutation(LIKE_POST, {
     variables: { postId: id },

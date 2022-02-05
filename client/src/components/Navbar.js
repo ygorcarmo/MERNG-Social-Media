@@ -46,7 +46,7 @@ function Navbars() {
         {Auth.loggedIn() ? (
           <Menu.Item
             name="Create a Post"
-            active={activeItem === "createPost"}
+            active={activeItem === "Create a Post"}
             onClick={handleItemClick}
             as={Link}
             to="/CreatePost"

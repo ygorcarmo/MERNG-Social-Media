@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const LOGIN_USER = gql`
   mutation login($username: String!, $password: String!) {
@@ -28,7 +28,6 @@ export const REGISTER_USER = gql`
   }
 `;
 
-
 export const CREATE_POST = gql`
   mutation createPost($body: String!) {
     createPost(body: $body) {
@@ -42,40 +41,35 @@ export const CREATE_POST = gql`
         username
         body
         createdAt
-        }
-        likeCount
-        likes {
-          id
-          username
-          createdAt
+      }
+      likeCount
+      likes {
+        id
+        username
+        createdAt
       }
     }
   }
 `;
 
 export const DELETE_POST = gql`
-  mutation deletePost($postId: String!) {
-    deletePost(postId: $postId) {
-      id
-      username
-      email
-      postCount
-    }
+  mutation deletePost($postId: ID!) {
+    deletePost(postId: $postId)
   }
 `;
 
 export const LIKE_POST = gql`
-mutation likePost($postId: ID){
-  likePost(postId: $postId){
-    id
-    likes{
+  mutation likePost($postId: ID) {
+    likePost(postId: $postId) {
       id
-      username
-      createdAt
+      likes {
+        id
+        username
+        createdAt
+      }
+      likeCount
     }
-    likeCount
   }
-}
 `;
 
 export const CREATE_COMMENT = gql`
@@ -93,7 +87,6 @@ export const CREATE_COMMENT = gql`
     }
   }
 `;
-
 
 export const DELETE_COMMENT = gql`
   mutation deleteComment($postId: ID!, $commentId: ID!) {
