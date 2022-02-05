@@ -3,7 +3,6 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type Post{
     id: ID
-    title: String
     body: String
     comments: [Comment]
     likes:[Like]
@@ -11,6 +10,8 @@ const typeDefs = gql`
     likeCount:Int
     createdAt: String
     username: String
+
+    user: User
   }
 
   type User{
@@ -54,6 +55,7 @@ const typeDefs = gql`
   }
   
  type Query {
+    me: User
     getPosts: [Post]
     getPost(postId: ID!): Post
   }
@@ -62,9 +64,9 @@ const typeDefs = gql`
     register(registerInput: RegisterInput): Auth
     login(username: String!, password: String!): Auth
 
-    createPost(body: String, title: String): Post
+    createPost(body: String): Post
     deletePost(postId: ID!): String
-    updatePost(id: ID, body: String!, title: String): Post
+    updatePost(id: ID, body: String!): Post
     savedPost(input: savedPost): User
     likePost(postId: ID): Post
 

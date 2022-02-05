@@ -27,16 +27,14 @@ module.exports = {
     },
   },
   Mutation: {
-    async createPost(parent, { body, title }, context) {
+    async createPost(parent, { body }, context) {
       const user = checkAuth(context);
 
       if(agrs.body.trim() === '')
         throw new Error('Post body must not be empty');
       
-      console.log(title);
       const newPost = new Post({
         body,
-        title,
         user: user.indexOf,
         username: user.username,
         createdAt: new Date().toISOString(),

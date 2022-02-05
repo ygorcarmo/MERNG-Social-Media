@@ -21,7 +21,6 @@ export const GET_POSTS = gql`
       }
       likeCount
       likes {
-        createdAt
         username
       }
     }

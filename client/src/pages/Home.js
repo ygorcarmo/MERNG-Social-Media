@@ -4,7 +4,6 @@ import {
     Container,
     Grid,
     GridColumn,
-    Image,
     Transition,
 } from 'semantic-ui-react'
 import Auth from '../utils/auth';
@@ -14,10 +13,10 @@ import '../styles/styles.css'
 import { GET_POSTS } from '../utils/queries'
 
 const Home = () => {
-    const { loading, data } = useQuery(GET_POSTS)
-    console.log(data)
-    const isLoggedIn = Auth.loggedIn();
-    const [visible, setVisble] = useState(false)
+  const { loading, data } = useQuery(GET_POSTS)
+  console.log(data)
+  const isLoggedIn = Auth.loggedIn();
+  const [visible, setVisble] = useState(false)
     const postData = data?.getPosts || []
 
     useEffect(() => {
@@ -27,14 +26,7 @@ const Home = () => {
     return (
         <>
             <Grid columns={3}>
-              <h1>Home Page</h1>
                 <Grid.Row>
-                    {/* if logged in show this form */}
-                    {isLoggedIn && (
-                        <GridColumn>
-                            <PostForm>{/* component */}</PostForm>
-                        </GridColumn>
-                    )}
                     {loading ? (
                         <h1> Loading Posts...</h1>
                     ) : (
@@ -43,9 +35,7 @@ const Home = () => {
                                 {postData &&
                                     postData.map((post, index) => (
                                         <Grid.Column key={index} style={{ margin: 20 }}>
-
                                             <PostCard post={post} />
-
                                         </Grid.Column>
                                     ))}
                             </Container>
