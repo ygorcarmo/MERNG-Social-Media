@@ -32,16 +32,14 @@ function Register(props) {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(values)
-
     try {
       const { data } = await registerUser({
         variables: {registerInput: { ...values }},
       });
-      Auth.login(data.register.token);
+      if(errors < 0)
+        Auth.login(data.register.token);
     } catch (e) {
       console.error(e);
-      console.log(e)
     }
     setValues({username: '',
     email: '',
