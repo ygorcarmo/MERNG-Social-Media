@@ -12,6 +12,9 @@ const Home = () => {
   const isLoggedIn = Auth.loggedIn();
   const [visible, setVisble] = useState(false);
   const postData = data?.getPosts || [];
+  if (!isLoggedIn) {
+    window.location = "/login";
+  }
 
   useEffect(() => {
     setVisble(!!data);

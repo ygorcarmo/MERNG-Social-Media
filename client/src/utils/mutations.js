@@ -29,8 +29,8 @@ export const REGISTER_USER = gql`
 `;
 
 export const CREATE_POST = gql`
-  mutation createPost($body: String!) {
-    createPost(body: $body) {
+  mutation createPost($body: String!, $postImage: String!) {
+    createPost(body: $body, postImage: $postImage) {
       id
       username
       body

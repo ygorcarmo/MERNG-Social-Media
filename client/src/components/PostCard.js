@@ -32,7 +32,7 @@ function PostCard({
         />
         <Card.Header>{username}</Card.Header>
         <div className="text-center">
-          <Image className="rounded img-fluid" size="huge" src={postImage} />
+          <Image className="rounded img-fluid" size="large" src={postImage} />
         </div>
         <Card.Description className="post-card-body p-2">
           {body} <Card.Meta>{moment(createdAt).fromNow()}</Card.Meta>

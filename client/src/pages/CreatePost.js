@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/styles.css";
 
 import { Container, Grid, Transition } from "semantic-ui-react";

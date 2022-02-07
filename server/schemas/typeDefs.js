@@ -1,7 +1,7 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-  type User{
+  type User {
     id: ID
     _id: ID
     email: String
@@ -11,15 +11,15 @@ const typeDefs = gql`
     createdAt: String
   }
 
-  type Post{
+  type Post {
     id: ID
     _id: ID
     body: String
     postImage: String
     comments: [Comment]
-    likes:[Like]
+    likes: [Like]
     commentCount: Int
-    likeCount:Int
+    likeCount: Int
     createdAt: String
     username: String
     user: User
@@ -32,20 +32,20 @@ const typeDefs = gql`
     body: String
   }
 
-  type Like{
+  type Like {
     id: ID
     createdAt: String
     username: String
   }
-  
-  input RegisterInput{
+
+  input RegisterInput {
     username: String
     email: String
     password: String
     confirmPassword: String
   }
 
-  input savedPost{
+  input savedPost {
     postId: String
     title: String
     username: String
@@ -56,19 +56,19 @@ const typeDefs = gql`
     token: ID!
     user: User
   }
-  
- type Query {
+
+  type Query {
     user(username: String!): User
     posts(username: String!): [Post]
     getPosts: [Post]
     getPost(postId: ID!): Post
   }
 
-  type Mutation{
+  type Mutation {
     register(registerInput: RegisterInput): Auth
     login(username: String!, password: String!): Auth
 
-    createPost(body: String, postImage: String): Post
+    createPost(body: String, postImage: String!): Post
     deletePost(postId: ID!): String
     updatePost(id: ID, body: String!): Post
     savedPost(input: savedPost): User
@@ -78,7 +78,7 @@ const typeDefs = gql`
     deleteComment(postId: ID, commentId: ID): Post
   }
 
-  type Subscription{
+  type Subscription {
     newPost: Post!
   }
 `;
