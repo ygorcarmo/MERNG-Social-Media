@@ -65,18 +65,12 @@ const PostForm = () => {
     },
   });
 
-  const onSubmit = async (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
     try {
       window.location = "/";
       console.log("create post");
-      console.log(url);
-      console.log({ body: values.body, postImage: url });
-      console.log(values);
-      const { data } = await createPost({
-        body: values.body,
-        postImage: values.postImage,
-      });
+      createPost();
     } catch (e) {
       console.error(e);
     }
