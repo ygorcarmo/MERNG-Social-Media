@@ -23,7 +23,7 @@ const PostForm = () => {
     var file = file.target.files[0];
     try {
       const uploadURL = await fetch(
-        "https://neon-cors-proxy.herokuapp.com/https://66auropgj8.execute-api.us-east-1.amazonaws.com"
+        "https://66auropgj8.execute-api.us-east-1.amazonaws.com"
       )
         .then((response) => response.json())
         .then(async (data) => {

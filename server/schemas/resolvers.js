@@ -3,22 +3,22 @@ const postResolver = require("./individualResolvers/post");
 const commentResolver = require("./individualResolvers/comment");
 
 const resolvers = {
-  Post:{
+  Post: {
     likeCount: (parent) => parent.likes.length,
-    commentCount: (parent) => parent.comments.length   
+    commentCount: (parent) => parent.comments.length,
   },
   Query: {
     ...postResolver.Query,
-    ...userResolver.Query
+    ...userResolver.Query,
   },
   Mutation: {
     ...userResolver.Mutation,
     ...postResolver.Mutation,
-    ...commentResolver.Mutation 
+    ...commentResolver.Mutation,
   },
   Subscription: {
-    ...postResolver.Subscription
-  }
+    ...postResolver.Subscription,
+  },
 };
 
 module.exports = resolvers;
